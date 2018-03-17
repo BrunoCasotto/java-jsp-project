@@ -16,7 +16,8 @@
 <body>
 <f:view>
 	<h:form>
-		Valor: #{exibirNumero.numero}  
+		Valor: <h:inputText value="#{testeBean.numero}" />
+		<h:commandButton value="Incrementar" action="#{testeBean.incrementar}" />
 	</h:form>
 </f:view>
 </body>
