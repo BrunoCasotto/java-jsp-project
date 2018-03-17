@@ -3,17 +3,30 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class Login {
-	private int numero = 9081723;
+	private String email = "";
+	private String password = "";
 	
-	public int getNumero() {
-		return this.numero;
+	public void login() {
+		
 	}
 	
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public String register() {
+		return "Registrar";
 	}
-	
-	public void incrementar() {
-		this.numero ++;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
