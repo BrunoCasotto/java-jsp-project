@@ -37,7 +37,7 @@
 		
 					<div class="form-group">
 						<h:inputText 
-							value="#{login.password}" 
+							value="#{userBean.user.password}" 
 							class="form-control" 
 							id="exampleInputPassword1" 
 							placeholder="Password"
@@ -49,14 +49,14 @@
 						<div class="col">
 							<h:commandButton 
 								value="Cancelar"
-								action="#{userBean.register}"
-								class="btn btn-primary col"
+								action="#{userBean.backToHome}"
+								class="btn btn-danger col"
 							/>
 						</div>
 						<div class="col">
 							<h:commandButton 
 								value="Registrar"
-								action="#{userBean.login}"
+								action="#{userBean.register}"
 								class="btn btn-primary col"
 							/>
 						</div>
