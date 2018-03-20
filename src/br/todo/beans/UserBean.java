@@ -1,13 +1,38 @@
 package br.todo.beans;
 import javax.faces.bean.ManagedBean;
 
+import br.ifsp.repositories.UserRepository;
 import br.todo.models.User;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 @ManagedBean
 public class UserBean {
 	private User user;
+	private String email;
+	private String password;
 	
 	public String register() {
+		user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+		
+		EntityManager manager = factory.createEntityManager();
+		
+		UserRepository userRepository = new UserRepository(manager);
+		
+		manager.getTransaction().begin();
+		
+		userRepository.add(user);
+		
+		manager.getTransaction().commit();
+		
+		factory.close();
+
 		return "Login";
 	}
 	
@@ -15,11 +40,20 @@ public class UserBean {
 		return "Login";
 	}
 
-	public User getUser() {
-		return user;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public String getPassword() {
+		return password;
 	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }
