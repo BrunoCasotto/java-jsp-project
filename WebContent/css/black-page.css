@@ -1,0 +1,14 @@
+.black-page {
+	padding: 50px 0;
+    background-image: url(../img/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+}
+.black-page__title {
+	color: #fff;
+	padding-left: 50px;
+}
+.black-page__content {
+	padding: 50px 50px;;
+}
