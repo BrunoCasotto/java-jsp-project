@@ -19,8 +19,16 @@ public class UserRepository {
 		return this.manager.find (User.class, id);
 	}
 	
+	public Object searchByEmail (String email) {
+		Query query = this.manager.createQuery("select e from User e where e.email like :email");
+		query.setParameter("email", email);
+		Object teste = query.getResultList();
+		System.out.println(teste.toString());
+		return query.getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
-	public List <User> buscaTodas() {
+	public List <User> searchAll() {
 		Query query = this.manager.createQuery(" SELECT e FROM users e");
 		return query.getResultList();
 	}
