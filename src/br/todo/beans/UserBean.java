@@ -2,6 +2,7 @@ package br.todo.beans;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -13,7 +14,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 @ManagedBean
+@SessionScoped
 public class UserBean {
+	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	Map<String, Object> sessionMap = externalContext.getSessionMap();
 	private User user;
 	private String email;
 	private String password;
@@ -31,12 +35,13 @@ public class UserBean {
 			UserRepository userRepository = new UserRepository(manager);
 			manager.getTransaction().begin();
 			
-			boolean result = userRepository.add(user);
+			User userResult = (User) userRepository.add(user);
 
 			manager.getTransaction().commit();		
 			factory.close();
 			
-			if(result) {
+			if(userResult != null) {
+				sessionMap.put("user.id",userResult.getId());
 				this.setAddError(true);
 				return "Home";
 			} else {
@@ -58,7 +63,8 @@ public class UserBean {
 			this.errorMessage = "Erro ao inserir, usuário existente!";
 		}
 	}
-	
+
+
 	public String backToHome() {
 		return "Login";
 	}

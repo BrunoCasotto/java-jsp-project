@@ -16,12 +16,12 @@ public class UserRepository {
 		this.manager = manager ;
 	}
 	
-	public boolean add (User e) {
+	public Object add (User e) {
 		try {
 			this.manager.persist(e);
-			return true;
+			return this.searchByEmail(e.getEmail());
 		} catch (Exception exception) {
-			return false;
+			return null;
 		}
 	}
 	

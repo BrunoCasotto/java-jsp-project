@@ -15,6 +15,12 @@ public class User {
 	@GeneratedValue
 	int id;
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Column (name="email", nullable=false)
 	private String email;
 	
