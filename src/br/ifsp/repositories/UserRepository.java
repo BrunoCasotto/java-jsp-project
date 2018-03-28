@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 public class UserRepository {
 	private EntityManager manager ;
 	
@@ -14,8 +16,13 @@ public class UserRepository {
 		this.manager = manager ;
 	}
 	
-	public void add (User e) {
-		this.manager.persist(e);
+	public boolean add (User e) {
+		try {
+			this.manager.persist(e);
+			return true;
+		} catch (Exception exception) {
+			return false;
+		}
 	}
 	
 	public User search (int id) {

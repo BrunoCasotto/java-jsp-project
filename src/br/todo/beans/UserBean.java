@@ -17,34 +17,46 @@ public class UserBean {
 	private User user;
 	private String email;
 	private String password;
-	
-	public UserBean() {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();
-		System.out.println(sessionMap.get("login_error_status"));
-		System.out.println(sessionMap.get("login_error_message"));
-	}
+	private String errorMessage = "";
+	private String error = "d-none";
 
 	public String register() {
-		user = new User();
-		user.setEmail(email);
-		user.setPassword(password);
+		try {
+			user = new User();
+			user.setEmail(email);
+			user.setPassword(password);
 
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
-		
-		EntityManager manager = factory.createEntityManager();
-		
-		UserRepository userRepository = new UserRepository(manager);
-		
-		manager.getTransaction().begin();
-		
-		userRepository.add(user);
-		
-		manager.getTransaction().commit();
-		
-		factory.close();
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+			EntityManager manager = factory.createEntityManager();
+			UserRepository userRepository = new UserRepository(manager);
+			manager.getTransaction().begin();
+			
+			boolean result = userRepository.add(user);
 
-		return "Login";
+			manager.getTransaction().commit();		
+			factory.close();
+			
+			if(result) {
+				this.setAddError(true);
+				return "Home";
+			} else {
+				this.setAddError(false);
+				return null;
+			}
+		}catch (Exception e) {
+			this.setAddError(false);
+			return null;
+		}
+	}
+	
+	public void setAddError(boolean status) {
+		if(status) {
+			this.error = "d-none";
+			this.errorMessage = "";
+		} else {
+			this.error = "";
+			this.errorMessage = "Erro ao inserir, usuário existente!";
+		}
 	}
 	
 	public String backToHome() {
@@ -65,6 +77,30 @@ public class UserBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 
 }
