@@ -1,5 +1,9 @@
 package br.todo.beans;
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import br.ifsp.repositories.UserRepository;
 import br.todo.models.User;
@@ -14,6 +18,13 @@ public class UserBean {
 	private String email;
 	private String password;
 	
+	public UserBean() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		System.out.println(sessionMap.get("login_error_status"));
+		System.out.println(sessionMap.get("login_error_message"));
+	}
+
 	public String register() {
 		user = new User();
 		user.setEmail(email);

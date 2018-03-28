@@ -1,7 +1,10 @@
 package br.ifsp.repositories;
 import br.todo.models.User;
+
 import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class UserRepository {
@@ -20,11 +23,15 @@ public class UserRepository {
 	}
 	
 	public Object searchByEmail (String email) {
-		Query query = this.manager.createQuery("select e from User e where e.email like :email");
-		query.setParameter("email", email);
-		Object teste = query.getResultList();
-		System.out.println(teste.toString());
-		return query.getSingleResult();
+		try {
+			Query query = this.manager.createQuery("select e from User e where e.email like :email");
+			query.setParameter("email", email);
+
+
+			return query.getSingleResult();
+		} catch (Exception exception) {
+			return null;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
