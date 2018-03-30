@@ -10,13 +10,60 @@
     </jsp:text>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link href="./css/vendor/bootstrap.css" rel="stylesheet" type="text/css"></link>
+	<link href="./css/base.css" rel="stylesheet" type="text/css"></link>
+	<link href="./css/black-page.css" rel="stylesheet" type="text/css"></link>
+	<title>Home</title>
 </head>
-<body>
+<body  class="black-body">
 <f:view>
-	<h2>#{homeBean.userName}</h2>
-	Tasks aqui
+	<div class="container-fluid black-page">
+		<div class="row justify-content-md-left black-page__title">
+			<h2>Todo - Home</h2>
+		</div>
+		<div class="row justify-content-md-left black-page__title">
+			<p>Gerenciador de tarefas</p>
+		</div>
+		
+		<div class="row justify-content-md-center black-page__content">
+			<div class="col-6 card card-body">
+				<div class="alert alert-warning #{login.error}">
+			  		<strong>Atenção!</strong> <span>#{login.errorMessage}</span>
+				</div>
+				
+				<h:form class="form login-page__content__form">
+					<div class="form-row">
+						<div class="col-10">
+							<h:inputText
+						    	value="#{homeBean.task}"
+						    	class="form-control"
+						    	type="text"
+						    	id="inputTask"
+						    	placeholder="Digite sua tarefa"
+						    />
+						</div>
+
+						<div class="col-2">
+							<h:commandButton 
+								value="Salvar"
+								action="#{homeBean.addTask}"
+								class="btn btn-primary col"
+							/>
+						</div>
+					</div>
+					
+					<h:dataTable value="#{homeBean.tasks}" var="taskItem">
+						<h:column>
+							<f:facet name="header">title</f:facet>
+							#{taskItem.title}
+						</h:column>
+					</h:dataTable>
+					
+				</h:form>
+			</div>
+		</div>
+	</div>
 </f:view>
 </body>
 </html>

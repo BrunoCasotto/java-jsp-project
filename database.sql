@@ -1,23 +1,11 @@
-drop database if exists tasks;
-create database if not exists tasks;
+use todo;
 
-use tasks;
+INSERT INTO tasks VALUES (5, 2, 'titulo da task', 0);
+INSERT INTO tasks VALUES (6, 2, 'titulo da task', 1);
+INSERT INTO tasks VALUES (7, 2, 'titulo da task', 0);
+INSERT INTO tasks VALUES (8, 2, 'titulo da task', 1);
 
-drop table if exists users;
-create table if not exists users (
-  id int(11) unsigned not null auto_increment,
-  email char(100) not null,
-  pass char(100) not null,
-  primary key (id),
-  unique key ex_email (email)
-);
+select * from todo.users;
+select * from todo.tasks;
 
-drop table if exists tasks;
-create table if not exists tasks (
-  id int(11) unsigned not null auto_increment,
-  userId int(11) unsigned not null,
-  title char(200) not null,
-  done tinyint(1) default 0,
-  primary key (id),
-  foreign key (userId) references users(id)
-);
+delete from todo.users where id = 4
