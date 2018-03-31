@@ -36,6 +36,14 @@ private EntityManager manager ;
 		}
 	}
 	
+	public void update(Task task) {
+		try {
+			this.manager.merge(task);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List <Task> searchAll() {
 		Query query = this.manager.createQuery(" SELECT e FROM Task e");

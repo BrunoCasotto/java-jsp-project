@@ -10,6 +10,20 @@
     height: 50px;
 }
 
+.task-done-1 {
+	color: red;
+	text-decoration: line-through;
+    font-weight: bold;
+}
+
+.task-done-1 .btn-done {
+	display: none;
+}
+
+.task-done-0 .btn-active {
+	display: none;
+}
+
 .task-item .checkbox {
     margin: 12px 0 0 0;
 }
@@ -21,6 +35,10 @@
 .task-list table {
 	width: 100%;
 	margin-top: 10px;
+}
+
+.task-list table tr td {
+	width: 100%;
 }
 
 .task-list table tr td:last-child {

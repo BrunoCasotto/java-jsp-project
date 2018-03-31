@@ -60,14 +60,24 @@
 							styleClass="table-striped"
 						>
 							<h:column>
-								<div class="col-1">
-
+								<div class="col-9 task-done-#{taskItem.done}">
+									#{taskItem.title}
 								</div>
 							</h:column>
-	
+							
 							<h:column>
-								<div class="col-9">
-									#{taskItem.title}
+								<div class="col-1 task-done-#{taskItem.done}">
+									<h:commandLink 
+										value="Finalizar" 
+										action="#{homeBean.setDone(taskItem)}" 
+										class="btn btn-warning btn-done"
+									/>
+
+									<h:commandLink 
+										value="Reativar" 
+										action="#{homeBean.setActive(taskItem)}" 
+										class="btn btn-success btn-active"
+									/>
 								</div>
 							</h:column>
 	

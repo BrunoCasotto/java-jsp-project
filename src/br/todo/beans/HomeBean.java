@@ -92,6 +92,44 @@ public class HomeBean {
 		}
 	}
 
+	public void setDone(Task task) {
+		try {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+			EntityManager manager = factory.createEntityManager();
+
+			TaskRepository taskRepository = new TaskRepository(manager);
+			manager.getTransaction().begin();
+			
+			task.setDone(1);
+			taskRepository.update(task);
+
+			manager.getTransaction().commit();		
+			factory.close();
+			setTasks();
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	public void setActive (Task task) {
+		try {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+			EntityManager manager = factory.createEntityManager();
+
+			TaskRepository taskRepository = new TaskRepository(manager);
+			manager.getTransaction().begin();
+			
+			task.setDone(0);
+			taskRepository.update(task);
+
+			manager.getTransaction().commit();		
+			factory.close();
+			setTasks();
+		} catch (Exception e) {
+			
+		}
+	}
+
 	public String getTask() {
 		return task;
 	}
