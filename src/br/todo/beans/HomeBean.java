@@ -46,24 +46,25 @@ public class HomeBean {
 	
 			manager.getTransaction().commit();		
 			factory.close();
+			setTasks();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void removeTask() {
+	public void removeTask(Task task) {
 		try {
-			System.out.println("chegou aqui");
-//			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
-//			EntityManager manager = factory.createEntityManager();
-//
-//			TaskRepository taskRepository = new TaskRepository(manager);
-//			manager.getTransaction().begin();
-//			
-//			taskRepository.remove(task);
-//
-//			manager.getTransaction().commit();		
-//			factory.close();
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+			EntityManager manager = factory.createEntityManager();
+
+			TaskRepository taskRepository = new TaskRepository(manager);
+			manager.getTransaction().begin();
+			
+			taskRepository.remove(task);
+
+			manager.getTransaction().commit();		
+			factory.close();
+			setTasks();
 		} catch (Exception e) {
 			
 		}

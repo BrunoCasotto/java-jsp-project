@@ -61,7 +61,7 @@
 						>
 							<h:column>
 								<div class="col-1">
-									<h:selectBooleanCheckbox value="" class="checkbox"/>
+
 								</div>
 							</h:column>
 	
@@ -75,7 +75,7 @@
 								<div class="col-2">
 									<h:commandLink 
 										value="apagar" 
-										action="#{homeBean.removeTask}" 
+										action="#{homeBean.removeTask(taskItem)}" 
 										class="btn btn-danger"
 									/>
 								</div>
