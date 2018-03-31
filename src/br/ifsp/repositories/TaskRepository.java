@@ -26,6 +26,16 @@ private EntityManager manager ;
 		return this.manager.find (Task.class, id);
 	}
 	
+	public void remove (Task task) {
+		try {
+			Query query = this.manager.createQuery("DELETE FROM Task where id = :id");
+			query.setParameter("id", task.getId());	
+			query.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List <Task> searchAll() {
 		Query query = this.manager.createQuery(" SELECT e FROM Task e");

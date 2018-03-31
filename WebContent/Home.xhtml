@@ -53,13 +53,35 @@
 						</div>
 					</div>
 					
-					<h:dataTable value="#{homeBean.tasks}" var="taskItem">
-						<h:column>
-							<f:facet name="header">title</f:facet>
-							#{taskItem.title}
-						</h:column>
-					</h:dataTable>
-					
+					<div class="task-list">
+						<h:dataTable 
+							value="#{homeBean.tasks}" 
+							var="taskItem" 
+							styleClass="table-striped"
+						>
+							<h:column>
+								<div class="col-1">
+									<h:selectBooleanCheckbox value="" class="checkbox"/>
+								</div>
+							</h:column>
+	
+							<h:column>
+								<div class="col-9">
+									#{taskItem.title}
+								</div>
+							</h:column>
+	
+							<h:column>
+								<div class="col-2">
+									<h:commandLink 
+										value="apagar" 
+										action="#{homeBean.removeTask}" 
+										class="btn btn-danger"
+									/>
+								</div>
+							</h:column>
+						</h:dataTable>
+					</div>
 				</h:form>
 			</div>
 		</div>

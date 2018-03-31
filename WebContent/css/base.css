@@ -2,6 +2,8 @@
 	background-color: black;
 }
 
+
+//home page
 .task-item {
     margin-top: 5px;
     padding: 5px;
@@ -14,4 +16,13 @@
 
 .task-item .task-item__text {
 	margin: 5px 0 0 0;
+}
+
+.task-list table {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.task-list table tr td:last-child {
+	width: 100px;
 }

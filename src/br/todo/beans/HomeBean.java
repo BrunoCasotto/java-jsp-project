@@ -19,7 +19,7 @@ import br.todo.models.User;
 public class HomeBean {
 	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	Map<String, Object> sessionMap = externalContext.getSessionMap();
-	private String task = "teste";
+	private String task = "";
 	private int userId;
 	private List<Task> tasks;
 
@@ -52,7 +52,21 @@ public class HomeBean {
 	}
 	
 	public void removeTask() {
-		
+		try {
+			System.out.println("chegou aqui");
+//			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+//			EntityManager manager = factory.createEntityManager();
+//
+//			TaskRepository taskRepository = new TaskRepository(manager);
+//			manager.getTransaction().begin();
+//			
+//			taskRepository.remove(task);
+//
+//			manager.getTransaction().commit();		
+//			factory.close();
+		} catch (Exception e) {
+			
+		}
 	}
 	
 	public void setTasks() {
