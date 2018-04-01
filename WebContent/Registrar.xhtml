@@ -32,7 +32,7 @@
 					<div class="form-group">
 					    <h:inputText
 					    	value="#{userBean.email}"
-					    	class="form-control"
+					    	class="form-control email-input"
 					    	type="email"
 					    	aria-describedby="emailHelp"
 					    	id="exampleInputEmail1"
@@ -41,9 +41,9 @@
 					</div>
 		
 					<div class="form-group">
-						<h:inputText 
+						<h:inputSecret 
 							value="#{userBean.password}" 
-							class="form-control" 
+							class="form-control password-input" 
 							id="exampleInputPassword1" 
 							placeholder="Password"
 							type="password"
@@ -62,7 +62,7 @@
 							<h:commandButton 
 								value="Registrar"
 								action="#{userBean.register}"
-								class="btn btn-primary col"
+								class="btn btn-primary col btn-login"
 							/>
 						</div>
 					</div>
@@ -71,6 +71,7 @@
 		</div>
 	</div>	
 </f:view>
+<script type="text/javascript" src="./js/form-validator.js"></script>
 </body>
 </html>
 </jsp:root>
