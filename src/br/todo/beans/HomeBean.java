@@ -22,6 +22,7 @@ public class HomeBean {
 	private String task = "";
 	private int userId;
 	private List<Task> tasks;
+	private String sort = "id";
 
 	public HomeBean() {
 		//userId = (int) sessionMap.get("user.id");
@@ -72,18 +73,13 @@ public class HomeBean {
 	
 	public void setTasks() {
 		try {
-			Task _task = new Task();
-			_task.setDone(0);
-			_task.setTitle(task);
-			_task.setUserId(userId);
-			
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
 			EntityManager manager = factory.createEntityManager();
 
 			TaskRepository taskRepository = new TaskRepository(manager);
 			manager.getTransaction().begin();
 			
-			tasks = taskRepository.searchAll();
+			tasks = taskRepository.searchAll(userId, sort);
 
 			manager.getTransaction().commit();		
 			factory.close();
@@ -94,6 +90,7 @@ public class HomeBean {
 
 	public void setDone(Task task) {
 		try {
+			System.out.println(task.getTitle());
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
 			EntityManager manager = factory.createEntityManager();
 
@@ -129,6 +126,11 @@ public class HomeBean {
 			
 		}
 	}
+	
+	public void filter () {
+		System.out.println(sort);
+		setTasks();
+	}
 
 	public String getTask() {
 		return task;
@@ -146,4 +148,19 @@ public class HomeBean {
 		this.tasks = tasks;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+	
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 }

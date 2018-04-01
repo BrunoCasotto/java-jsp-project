@@ -45,8 +45,10 @@ private EntityManager manager ;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List <Task> searchAll() {
-		Query query = this.manager.createQuery(" SELECT e FROM Task e");
+	public List <Task> searchAll(int userId, String sort) {
+		Query query = this.manager.createQuery(" SELECT e FROM Task e where e.userId = :userId " + "ORDER BY "+ sort+" ASC");
+		query.setParameter("userId", userId);
+		
 		return query.getResultList();
 	}
 

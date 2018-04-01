@@ -28,10 +28,6 @@
 		
 		<div class="row justify-content-md-center black-page__content">
 			<div class="col-6 card card-body">
-				<div class="alert alert-warning #{login.error}">
-			  		<strong>Atenção!</strong> <span>#{login.errorMessage}</span>
-				</div>
-				
 				<h:form class="form login-page__content__form">
 					<div class="form-row">
 						<div class="col-10">
@@ -52,7 +48,26 @@
 							/>
 						</div>
 					</div>
-					
+
+					<div class="form-row mt-2">
+
+						<div class="col-10">
+							<h:selectOneRadio value = "#{homeBean.sort}"> 
+								<f:selectItem itemValue = "id" itemLabel = "Criação" />
+							   	<f:selectItem itemValue = "done" itemLabel = "Done" />
+							    <f:selectItem itemValue = "title" itemLabel = "Title" />
+							</h:selectOneRadio>
+						</div>
+
+						<div class="col-2">
+							<h:commandButton 
+								value="Filtrar"
+								action="#{homeBean.filter}"
+								class="btn btn-primary col"
+							/>
+						</div>
+					</div>
+
 					<div class="task-list">
 						<h:dataTable 
 							value="#{homeBean.tasks}" 
@@ -92,6 +107,7 @@
 							</h:column>
 						</h:dataTable>
 					</div>
+				
 				</h:form>
 			</div>
 		</div>

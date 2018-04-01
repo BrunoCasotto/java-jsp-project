@@ -14,7 +14,7 @@ import br.todo.models.User;
 
 @ManagedBean
 @SessionScoped
-public class Login {
+public class LoginBean {
 	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	Map<String, Object> sessionMap = externalContext.getSessionMap();
 	private String email = "";

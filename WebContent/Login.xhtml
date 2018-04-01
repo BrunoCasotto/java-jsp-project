@@ -26,13 +26,13 @@
 
 		<div class="row justify-content-md-left black-page__content">
 			<div class="col-4 card card-body">
-				<div class="alert alert-warning #{login.error}">
-				  <strong>Atenção!</strong> <span>#{login.errorMessage}</span>
+				<div class="alert alert-warning #{loginBean.error}">
+				  <strong>Atenção!</strong> <span>#{loginBean.errorMessage}</span>
 				</div>
 				<h:form class="form login-page__content__form">
 					<div class="form-group">
 					    <h:inputText
-					    	value="#{login.email}"
+					    	value="#{loginBean.email}"
 					    	class="form-control"
 					    	type="email"
 					    	aria-describedby="emailHelp"
@@ -43,7 +43,7 @@
 		
 					<div class="form-group">
 						<h:inputSecret 
-							value="#{login.password}" 
+							value="#{loginBean.password}" 
 							class="form-control" 
 							id="exampleInputPassword1" 
 							placeholder="Password"
@@ -61,7 +61,7 @@
 						<div class="col">
 							<h:commandButton 
 								value="Entrar"
-								action="#{login.login}"
+								action="#{loginBean.login}"
 								class="btn btn-primary col"
 							/>
 						</div>

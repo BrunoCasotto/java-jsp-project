@@ -32,6 +32,13 @@
 	margin: 5px 0 0 0;
 }
 
+.task-list {
+	overflow-y: scroll;
+	max-height: 400px;
+	overflow-x: hidden;
+}
+
+
 .task-list table {
 	width: 100%;
 	margin-top: 10px;
