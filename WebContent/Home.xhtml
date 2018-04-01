@@ -28,7 +28,17 @@
 		
 		<div class="row justify-content-md-center black-page__content">
 			<div class="col-6 card card-body">
-				<h:form class="form login-page__content__form">
+
+				<div class="alert alert-warning #{homeBean.error}">
+				  <strong>Atenção!</strong> 
+				  <span>Faça o 
+				  	<h:outputLink value ="/Todo/Login.xhtml">
+				  		Login
+				  	</h:outputLink>
+				  	</span>
+				</div>
+
+				<h:form class="form login-page__content__form #{homeBean.showForm}">
 					<div class="form-row">
 						<div class="col-10">
 							<h:inputText
@@ -49,13 +59,13 @@
 						</div>
 					</div>
 
-					<div class="form-row mt-2">
+					<div class="form-row mt-2 form-sort">
 
-						<div class="col-10">
+						<div class="col-10 form-sort__content">
 							<h:selectOneRadio value = "#{homeBean.sort}"> 
 								<f:selectItem itemValue = "id" itemLabel = "Criação" />
 							   	<f:selectItem itemValue = "done" itemLabel = "Done" />
-							    <f:selectItem itemValue = "title" itemLabel = "Title" />
+							    <f:selectItem itemValue = "title" itemLabel = "Titulo" />
 							</h:selectOneRadio>
 						</div>
 
@@ -74,9 +84,10 @@
 							var="taskItem" 
 							styleClass="table-striped"
 						>
+
 							<h:column>
 								<div class="col-9 task-done-#{taskItem.done}">
-									#{taskItem.title}
+									#{taskItem.title} 
 								</div>
 							</h:column>
 							
@@ -107,7 +118,12 @@
 							</h:column>
 						</h:dataTable>
 					</div>
-				
+					
+					<h:commandButton
+						value="sair"
+						action="#{homeBean.logout}"
+						class="btn btn-secondary"
+					/>
 				</h:form>
 			</div>
 		</div>

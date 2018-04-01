@@ -15,41 +15,68 @@ import br.todo.models.User;
 @ManagedBean
 @SessionScoped
 public class LoginBean {
-	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	Map<String, Object> sessionMap = externalContext.getSessionMap();
+
 	private String email = "";
 	private String password = "";
 	private User user;
 	private String errorMessage = "";
 	private String error = "d-none";
+	
+	public void Loginbean() {
+		try {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> sessionMap = externalContext.getSessionMap();
+			sessionMap.remove("user");
+		} catch(Exception e){
+			
+		}
+	}
 
 	public String login() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
-		EntityManager manager = factory.createEntityManager();
-		UserRepository userRepository = new UserRepository(manager);
-		manager.getTransaction().begin();
-		
-		user = (User)userRepository.searchByEmail(email);
+		try {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
+			EntityManager manager = factory.createEntityManager();
+			UserRepository userRepository = new UserRepository(manager);
+			manager.getTransaction().begin();
+			
+			user = (User)userRepository.searchByEmail(email);
 
-		String userPass = null;
-		String userEmail = null;
+			String userPass = null;
+			String userEmail = null;
+			int userId;
 
-		if(!(user == null)) {
-			userPass = user.getPassword();
-			userEmail = user.getEmail();
-		} else {
-			this.validateForm(false, true);
+			if(user != null) {
+				userPass = user.getPassword();
+				userEmail = user.getEmail();
+				userId = user.getId();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				Map<String, Object> sessionMap = externalContext.getSessionMap();
+				
+				if(sessionMap.containsKey("user")) {
+					sessionMap.replace("user", user);					
+				} else {
+					sessionMap.put("user", user);
+				}
+
+			} else {
+				this.validateForm(false, true);
+				return null;
+			}
+
+			manager.getTransaction().commit();
+			factory.close();
+			
+			final boolean isValid = this.validateForm(userEmail.equals(email), userPass.equals(password));
+
+			String res = (isValid) ? "Home" : null;
+			
+			return res;
+
+		} catch (Exception e) {
+			System.out.println("Erro no login" + e.getMessage());
 			return null;
 		}
-
-		manager.getTransaction().commit();
-		factory.close();
-		
-		final boolean isValid = this.validateForm(userEmail.equals(email), userPass.equals(password));
-
-		String res = (isValid) ? "Home" : null;
-		
-		return res;
 	}
 	
 	private boolean validateForm(boolean emailStatus, boolean passStatus) {

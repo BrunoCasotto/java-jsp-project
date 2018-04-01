@@ -16,8 +16,6 @@ import javax.persistence.Persistence;
 @ManagedBean
 @SessionScoped
 public class UserBean {
-	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	Map<String, Object> sessionMap = externalContext.getSessionMap();
 	private User user;
 	private String email;
 	private String password;
@@ -41,7 +39,15 @@ public class UserBean {
 			factory.close();
 			
 			if(userResult != null) {
-				sessionMap.put("user.id",userResult.getId());
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				Map<String, Object> sessionMap = externalContext.getSessionMap();
+				
+				if(sessionMap.containsKey("user")) {
+					sessionMap.replace("user", user);					
+				} else {
+					sessionMap.put("user", user);
+				}
+				
 				this.setAddError(true);
 				return "Home";
 			} else {

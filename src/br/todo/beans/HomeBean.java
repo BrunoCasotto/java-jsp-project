@@ -23,11 +23,30 @@ public class HomeBean {
 	private int userId;
 	private List<Task> tasks;
 	private String sort = "id";
+	private String error = "";
+	private String showForm = "d-none";
 
 	public HomeBean() {
-		//userId = (int) sessionMap.get("user.id");
-		userId = 1;
-		setTasks();
+		try {
+			final User user = (User) sessionMap.get("user");
+			userId = user.getId();
+
+			error = "d-none";
+			showForm = "";
+			setTasks();
+		} catch (Exception e) {
+			error = "";
+			showForm = "d-none";
+		}
+	}
+	
+	public String logout() {
+		try {
+			sessionMap.remove("user");
+			return "Login";
+		} catch (Exception e) {
+			return "Login";
+		}
 	}
 	
 	public void addTask() {
@@ -47,6 +66,7 @@ public class HomeBean {
 	
 			manager.getTransaction().commit();		
 			factory.close();
+			task = null;
 			setTasks();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -89,8 +109,7 @@ public class HomeBean {
 	}
 
 	public void setDone(Task task) {
-		try {
-			System.out.println(task.getTitle());
+		try {			
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("todo");
 			EntityManager manager = factory.createEntityManager();
 
@@ -162,5 +181,21 @@ public class HomeBean {
 	
 	public void setSort(String sort) {
 		this.sort = sort;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	public String getShowForm() {
+		return showForm;
+	}
+
+	public void setShowForm(String showForm) {
+		this.showForm = showForm;
 	}
 }
