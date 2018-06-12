@@ -1,23 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" version="2.0">
-    <jsp:directive.page language="java"
-        contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
-    <jsp:text>
-        <![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
-    </jsp:text>
-    <jsp:text>
-        <![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
-    </jsp:text>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<link href="./css/vendor/bootstrap.css" rel="stylesheet" type="text/css"></link>
-	<link href="./css/base.css" rel="stylesheet" type="text/css"></link>
-	<link href="./css/black-page.css" rel="stylesheet" type="text/css"></link>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Registro</title>
-</head>
-<body class="black-body">
-<f:view>
+<ui:composition template="/Template.xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:define name="title">Registro</ui:define>
+	<ui:define name="script">
+		<script type="text/javascript" src="./js/form-validator.js"></script>
+	</ui:define>
+	<ui:define name="main">
 	<div class="container-fluid black-page">
 		<div class="row justify-content-md-lef black-page__title">
 			<h2>Todo - registrar</h2>
@@ -26,7 +12,7 @@
 		<div class="row justify-content-md-left black-page__content">
 			<div class="col-4 card card-body">
 				<div class="alert alert-warning #{userBean.error}">
-				  <strong>Atenção!</strong> <span>#{userBean.errorMessage}</span>
+				  <strong>AtenÃ§Ã£o!</strong> <span>#{userBean.errorMessage}</span>
 				</div>
 				<h:form >
 					<div class="form-group">
@@ -69,9 +55,6 @@
 				</h:form>			
 			</div>
 		</div>
-	</div>	
-</f:view>
-<script type="text/javascript" src="./js/form-validator.js"></script>
-</body>
-</html>
-</jsp:root>
+	</div>
+	</ui:define>
+</ui:composition>
