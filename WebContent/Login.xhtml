@@ -2,9 +2,11 @@
 	<ui:define name="title">Login</ui:define>
 	<ui:define name="main">
 		<div class="container-fluid black-page">
-			<div class="row justify-content-md-left black-page__title">
-				<h2>Todo - login</h2>
-			</div>
+			<ui:include src="/menu.xhtml">
+				<ui:param name="title" value="Todo - login"/>
+				<ui:param name="showHome" value="d-none"/>
+				<ui:param name="showRegister" value=""/>
+			</ui:include>
 			
 			<div class="row justify-content-md-left black-page__content">
 				<div class="col-4 card card-body">
