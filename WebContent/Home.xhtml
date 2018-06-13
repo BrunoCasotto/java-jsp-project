@@ -1,134 +1,115 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" version="2.0">
-    <jsp:directive.page language="java"
-        contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
-    <jsp:text>
-        <![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
-    </jsp:text>
-    <jsp:text>
-        <![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
-    </jsp:text>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<link href="./css/vendor/bootstrap.css" rel="stylesheet" type="text/css"></link>
-	<link href="./css/base.css" rel="stylesheet" type="text/css"></link>
-	<link href="./css/black-page.css" rel="stylesheet" type="text/css"></link>
-	<title>Home</title>
-</head>
-<body  class="black-body">
-<f:view>
-	<div class="container-fluid black-page">
-		<div class="row justify-content-md-left black-page__title">
-			<h2>Todo - Home</h2>
-		</div>
-		<div class="row justify-content-md-left black-page__title">
-			<p>Gerenciador de tarefas</p>
-		</div>
-		
-		<div class="row justify-content-md-center black-page__content">
-			<div class="col-6 card card-body">
-
-				<div class="alert alert-warning #{homeBean.error}">
-				  <strong>Atenção!</strong> 
-				  <span>Faça o 
-				  	<h:outputLink value ="/Todo/Login.xhtml">
-				  		Login
-				  	</h:outputLink>
-				  	</span>
-				</div>
-
-				<h:form class="form login-page__content__form #{homeBean.showForm}">
-					<div class="form-row">
-						<div class="col-10">
-							<h:inputText
-						    	value="#{homeBean.task}"
-						    	class="form-control"
-						    	type="text"
-						    	id="inputTask"
-						    	placeholder="Digite sua tarefa"
-						    />
-						</div>
-
-						<div class="col-2">
-							<h:commandButton 
-								value="Salvar"
-								action="#{homeBean.addTask}"
-								class="btn btn-primary col"
-							/>
-						</div>
-					</div>
-
-					<div class="form-row mt-2 form-sort">
-
-						<div class="col-10 form-sort__content">
-							<h:selectOneRadio value = "#{homeBean.sort}"> 
-								<f:selectItem itemValue = "id" itemLabel = "Criação" />
-							   	<f:selectItem itemValue = "done" itemLabel = "Done" />
-							    <f:selectItem itemValue = "title" itemLabel = "Titulo" />
-							</h:selectOneRadio>
-						</div>
-
-						<div class="col-2">
-							<h:commandButton 
-								value="Filtrar"
-								action="#{homeBean.filter}"
-								class="btn btn-primary col"
-							/>
-						</div>
-					</div>
-
-					<div class="task-list">
-						<h:dataTable 
-							value="#{homeBean.tasks}" 
-							var="taskItem" 
-							styleClass="table-striped"
-						>
-
-							<h:column>
-								<div class="col-9 task-done-#{taskItem.done}">
-									#{taskItem.title} 
-								</div>
-							</h:column>
-							
-							<h:column>
-								<div class="col-1 task-done-#{taskItem.done}">
-									<h:commandLink 
-										value="Finalizar" 
-										action="#{homeBean.setDone(taskItem)}" 
-										class="btn btn-warning btn-done"
-									/>
-
-									<h:commandLink 
-										value="Reativar" 
-										action="#{homeBean.setActive(taskItem)}" 
-										class="btn btn-success btn-active"
-									/>
-								</div>
-							</h:column>
+<ui:composition template="/Template.xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"  xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:f="http://java.sun.com/jsf/core" >
+	<ui:define name="title">Home</ui:define>
+	<ui:define name="main">
+		<div class="container-fluid black-page">
+			<div class="row justify-content-md-left black-page__title">
+				<h2>Todo - Home</h2>
+			</div>
+			<div class="row justify-content-md-left black-page__title">
+				<p>Gerenciador de tarefas</p>
+			</div>
+			
+			<div class="row justify-content-md-center black-page__content">
+				<div class="col-6 card card-body">
 	
-							<h:column>
-								<div class="col-2">
-									<h:commandLink 
-										value="apagar" 
-										action="#{homeBean.removeTask(taskItem)}" 
-										class="btn btn-danger"
-									/>
-								</div>
-							</h:column>
-						</h:dataTable>
+					<div class="alert alert-warning #{homeBean.error}">
+					  <strong>AtenÃ§Ã£o!</strong> 
+					  <span>FaÃ§a o 
+					  	<h:outputLink value ="/Todo/Login.xhtml">
+					  		Login
+					  	</h:outputLink>
+					  	</span>
 					</div>
-					
-					<h:commandButton
-						value="sair"
-						action="#{homeBean.logout}"
-						class="btn btn-secondary"
-					/>
-				</h:form>
+	
+					<h:form class="form login-page__content__form #{homeBean.showForm}">
+						<div class="form-row">
+							<div class="col-10">
+								<h:inputText
+							    	value="#{homeBean.task}"
+							    	class="form-control"
+							    	type="text"
+							    	id="inputTask"
+							    	placeholder="Digite sua tarefa"
+							    />
+							</div>
+	
+							<div class="col-2">
+								<h:commandButton 
+									value="Salvar"
+									action="#{homeBean.addTask}"
+									class="btn btn-primary col"
+								/>
+							</div>
+						</div>
+	
+						<div class="form-row mt-2 form-sort">
+	
+							<div class="col-10 form-sort__content">
+								<h:selectOneRadio value = "#{homeBean.sort}"> 
+									<f:selectItem itemValue = "id" itemLabel = "CriaÃ§Ã£o" />
+								   	<f:selectItem itemValue = "done" itemLabel = "Done" />
+								    <f:selectItem itemValue = "title" itemLabel = "Titulo" />
+								</h:selectOneRadio>
+							</div>
+	
+							<div class="col-2">
+								<h:commandButton 
+									value="Filtrar"
+									action="#{homeBean.filter}"
+									class="btn btn-primary col"
+								/>
+							</div>
+						</div>
+	
+						<div class="task-list">
+							<h:dataTable 
+								value="#{homeBean.tasks}" 
+								var="taskItem" 
+								styleClass="table-striped"
+							>
+	
+								<h:column>
+									<div class="col-9 task-done-#{taskItem.done}">
+										#{taskItem.title} 
+									</div>
+								</h:column>
+								
+								<h:column>
+									<div class="col-1 task-done-#{taskItem.done}">
+										<h:commandLink 
+											value="Finalizar" 
+											action="#{homeBean.setDone(taskItem)}" 
+											class="btn btn-warning btn-done"
+										/>
+	
+										<h:commandLink 
+											value="Reativar" 
+											action="#{homeBean.setActive(taskItem)}" 
+											class="btn btn-success btn-active"
+										/>
+									</div>
+								</h:column>
+		
+								<h:column>
+									<div class="col-2">
+										<h:commandLink 
+											value="apagar" 
+											action="#{homeBean.removeTask(taskItem)}" 
+											class="btn btn-danger"
+										/>
+									</div>
+								</h:column>
+							</h:dataTable>
+						</div>
+						
+						<h:commandButton
+							value="sair"
+							action="#{homeBean.logout}"
+							class="btn btn-secondary"
+						/>
+					</h:form>
+				</div>
 			</div>
 		</div>
-	</div>
-</f:view>
-</body>
-</html>
-</jsp:root>
+	</ui:define>
+</ui:composition>

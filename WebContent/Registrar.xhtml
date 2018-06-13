@@ -4,57 +4,57 @@
 		<script type="text/javascript" src="./js/form-validator.js"></script>
 	</ui:define>
 	<ui:define name="main">
-	<div class="container-fluid black-page">
-		<div class="row justify-content-md-lef black-page__title">
-			<h2>Todo - registrar</h2>
-		</div>
-
-		<div class="row justify-content-md-left black-page__content">
-			<div class="col-4 card card-body">
-				<div class="alert alert-warning #{userBean.error}">
-				  <strong>Atenção!</strong> <span>#{userBean.errorMessage}</span>
-				</div>
-				<h:form >
-					<div class="form-group">
-					    <h:inputText
-					    	value="#{userBean.email}"
-					    	class="form-control email-input"
-					    	type="email"
-					    	aria-describedby="emailHelp"
-					    	id="exampleInputEmail1"
-					    	placeholder="Email"
-					    />
+		<div class="container-fluid black-page">
+			<div class="row justify-content-md-lef black-page__title">
+				<h2>Todo - registrar</h2>
+			</div>
+	
+			<div class="row justify-content-md-left black-page__content">
+				<div class="col-4 card card-body">
+					<div class="alert alert-warning #{userBean.error}">
+					  <strong>Atenção!</strong> <span>#{userBean.errorMessage}</span>
 					</div>
-		
-					<div class="form-group">
-						<h:inputSecret 
-							value="#{userBean.password}" 
-							class="form-control password-input" 
-							id="exampleInputPassword1" 
-							placeholder="Password"
-							type="password"
-						/>
-					</div>
-					
-					<div class="form-row">
-						<div class="col">
-							<h:outputLink 
-								class="btn btn-danger col"
-								value ="/Todo/Login.xhtml"
-							> Cancelar </h:outputLink>
+					<h:form >
+						<div class="form-group">
+						    <h:inputText
+						    	value="#{userBean.email}"
+						    	class="form-control email-input"
+						    	type="email"
+						    	aria-describedby="emailHelp"
+						    	id="exampleInputEmail1"
+						    	placeholder="Email"
+						    />
 						</div>
-
-						<div class="col">
-							<h:commandButton 
-								value="Registrar"
-								action="#{userBean.register}"
-								class="btn btn-primary col btn-login"
+			
+						<div class="form-group">
+							<h:inputSecret 
+								value="#{userBean.password}" 
+								class="form-control password-input" 
+								id="exampleInputPassword1" 
+								placeholder="Password"
+								type="password"
 							/>
 						</div>
-					</div>
-				</h:form>			
+						
+						<div class="form-row">
+							<div class="col">
+								<h:outputLink 
+									class="btn btn-danger col"
+									value ="/Todo/Login.xhtml"
+								> Cancelar </h:outputLink>
+							</div>
+	
+							<div class="col">
+								<h:commandButton 
+									value="Registrar"
+									action="#{userBean.register}"
+									class="btn btn-primary col btn-login"
+								/>
+							</div>
+						</div>
+					</h:form>			
+				</div>
 			</div>
 		</div>
-	</div>
 	</ui:define>
 </ui:composition>
